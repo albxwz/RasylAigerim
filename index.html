@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+
+
+<style>
+@media screen and (max-width: 1280px) {div.contentblock {width: 1200px;} } 
+@media screen and (max-width: 1140px) { div.contentblock {width: 1024px;} } 
+@media screen and (max-width: 992px) { div. contentblock {width: 970px;} } 
+
+
+</style>
+<style >
+.element-animation{ 
+    top: 0px; 
+    opacity: 0; 
+    position: relative; 
+} 
+.element-animation.element-show{ 
+position: relative; 
+top: 20px; 
+opacity: 1; 
+transition-duration: 1.4s; 
+}
+
+
+
+.conteiner{
+   width: 90%;
+   height: 50%;
+   background: linear-gradient(to top left, #4875FF  0%, #002188  100%);
+   border-radius: 20px;}
+
+.hgh{
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 2.5;
+      -webkit-text-size-adjust: 80%;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      display: flex;
+      justify-content: center;
+    }
+
+    .timer__items {
+      display: flex;
+      font-size: 25px;
+      color: black;
+      border-color: black ;
+
+    }
+    
+
+
+    .timer__item {
+      position: relative;
+      min-width: 40px;
+      margin-left: 10px;
+      margin-right: 10px;
+      padding-bottom: 10px;
+      
+
+
+    }
+
+
+    .timer__item::before {
+      content: attr(data-title);
+      display: block;
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      font-size: 10px;
+
+    }
+
+
+    .timer__item:not(:last-child)::after {
+      content: ':';
+      position: absolute;
+      right: -15px;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</style>
+
+<style >
+   img.rot {
+  animation: 1s linear 0s normal none infinite running rot;
+  -webkit-animation: 5s linear 0s normal none infinite running rot;
+  width: 100px;
+}
+@keyframes rot {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes rot {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
+
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // конечная дата, например 1 декабря 2021
+  const deadline = new Date(2023, 09, 07);
+  // id таймера
+  let timerId = null;
+  // склонение числительных
+  function declensionNum(num, words) {
+    return words[(num % 100 > 4 && num % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(num % 10 < 5) ? num % 10 : 5]];
+  }
+  // вычисляем разницу дат и устанавливаем оставшееся времени в качестве содержимого элементов
+  function countdownTimer() {
+    const diff = deadline - new Date();
+    if (diff <= 0) {
+      clearInterval(timerId);
+    }
+    const days = diff > 0 ? Math.floor(diff / 1000 / 60 / 60 / 24) : 0;
+    const hours = diff > 0 ? Math.floor(diff / 1000 / 60 / 60) % 24 : 0;
+    const minutes = diff > 0 ? Math.floor(diff / 1000 / 60) % 60 : 0;
+    const seconds = diff > 0 ? Math.floor(diff / 1000) % 60 : 0;
+    $days.textContent = days < 10 ? '0' + days : days;
+    $hours.textContent = hours < 10 ? '0' + hours : hours;
+    $minutes.textContent = minutes < 10 ? '0' + minutes : minutes;
+    $seconds.textContent = seconds < 10 ? '0' + seconds : seconds;
+    $days.dataset.title = declensionNum(days, ['күн', 'күн', 'күн']);
+    $hours.dataset.title = declensionNum(hours, ['сағат', 'сағат', 'сағат']);
+    $minutes.dataset.title = declensionNum(minutes, ['минут', 'минут', 'минут']);
+    $seconds.dataset.title = declensionNum(seconds, ['секунд', 'секунд', 'секунд']);
+  }
+  // получаем элементы, содержащие компоненты даты
+  const $days = document.querySelector('.timer__days');
+  const $hours = document.querySelector('.timer__hours');
+  const $minutes = document.querySelector('.timer__minutes');
+  const $seconds = document.querySelector('.timer__seconds');
+  // вызываем функцию countdownTimer
+  countdownTimer();
+  // вызываем функцию countdownTimer каждую секунду
+  timerId = setInterval(countdownTimer, 1000);
+});
+</script>
+
+
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Расул & Айгерім үйлену тойына шақыру!</title> 
+
+ <style>
+      * {box-sizing: border-box}
+     
+      .mySlides {display: none}
+      img {vertical-align: middle;}
+      .slideshow-container {
+      max-width: 1000px;
+      position: relative;
+      margin: auto;
+      }
+      /* Кнопки next & previous */
+      .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 16px;
+      margin-top: -22px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      }
+      /* Измените положение "next button" */
+      .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+      }
+      /* Добавьте черный фоновый цвет с небольшой прозрачностью */
+      .prev:hover, .next:hover {
+      background-color: rgba(0,0,0,0.8);
+      }
+      /* Подпись под изображением */
+      
+      /* Number text (1/3 etc) */
+      .numbertext {
+      color: #ffffff;
+      font-size: 12px;
+      padding: 8px 12px;
+      position: absolute;
+      top: 0;
+      }
+      /* Точки/маркеры/указатели */
+      .dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #999999;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+      }
+      .active, .dot:hover {
+      background-color: #111111;
+      }
+      /* Выцветание анимации */
+      .fade {
+      -webkit-animation-name: fade;
+      -webkit-animation-duration: 0.5s;
+      animation-name: fade;
+      animation-duration: 2.5s;
+      }
+      @-webkit-keyframes fade {
+      from {opacity: .4} 
+      to {opacity: 1}
+      }
+      @keyframes fade {
+      from {opacity: .4} 
+      to {opacity: 1}
+      }
+      /* Для маленьких экранов увеличьте размер текста  */
+      @media only screen and (max-width: 300px) {
+      .prev, .next,.text {font-size: 11px}
+      }
+
+
+
+
+      .form-inner {
+   position: relative;
+}
+.form-inner h3 {
+   position: relative;
+   margin-top: 0;
+   color: black;
+   font-family: 'Roboto', sans-serif;
+   font-weight: 100;
+   font-size: 15px;
+   text-align: center;
+   
+}
+
+}
+.form-inner label {
+   display: block;
+   padding-left: 15px;
+   font-family: 'Roboto', sans-serif;
+   color: rgba(255, 255, 255, .6);
+   text-transform: uppercase;
+   font-size: 15px;
+padding: 0 15px;
+   margin: 10px 0 15px;
+}
+.form-inner input {
+   width: 50%;
+    border: 0;
+    border-bottom: 2px solid #aaa;
+    font-size: 13px;
+    font-weight: 300;
+    background-color: #FCFCFF ;
+    letter-spacing: 0.11em;
+   font-family: 'Roboto', sans-serif;
+  padding: 0 15px;
+   margin: 10px 0 15px;
+
+}
+.btb {
+   width: 50%;
+   height: 30px;
+    border: 0;
+    
+    font-size: 13px;
+    font-weight: 300;
+    color: #797a9e;
+    letter-spacing: 0.11em;
+border-radius: 20px;
+}
+
+
+
+.form-inner textarea {
+   width: 50%;
+   margin-top: 10px;
+    border: 0;
+    border-bottom: 2px solid #aaa;
+    font-size: 13px;
+    font-weight: 300;
+    background-color:#FCFCFF;
+    letter-spacing: 0.11em;
+ height: 25px;
+   font-family: 'Roboto', sans-serif;
+  
+}
+
+.form-inner input[type="submit"] {
+    background: linear-gradient(to top left, #FF9797 0%, #B70000 100%);
+}
+
+    </style>
+
+
+<style>
+  body{
+    background-color:#FCFCFF  ;
+  }
+
+
+
+input:hover {
+    background: rgba(0,0,0,0);
+    color: #3a7999;
+    box-shadow: inset 0 0 0 3px #3a7999;
+}
+
+input:button {
+    background: rgba(0,0,0,0);
+    color: #3a7999;
+    box-shadow: inset 0 0 0 3px #3a7999;
+}
+
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+<img src="tghgtfhjytj.png" style="position: fixed; right: 0px; top:515px;" width="50">
+
+
+
+
+<img src="IMG_2571.gif" style="width: 100%; height: 100%;">
+
+
+
+
+
+
+
+<center>
+<div class="element-animation"> 
+<img src="fbfgnbgn.png" style="width: 80%; margin-top: 20px;">
+
+</div></center>
+
+
+<center>
+<div class="element-animation"> 
+<img src="rghthtrh.png" style="width: 90%;margin-top: 60px;">
+
+</div></center>
+
+
+
+<audio><source type="audio/mpeg"src="mdee-toi-zyry-cover-mdos-mucasan-1_x1RoGMOP.mp3"/>
+</audio><button   type = "button" name = "button2" onclick="this.previousSibling.play()" style = "border-radius: 50%;border:none;position: fixed;background:none;
+    right: 15px;
+    top: 450px;width: 50px; height:50px">
+<img src = "thbtgygtjyj.png" alt = "up" width = "50"  style="position: center;"></button>
+
+
+
+<center>
+<div class="element-animation"> 
+<img src="dfrgdrfhg.png" style="width: 85%;margin-top: 30px;">
+
+</div></center>
+
+
+
+
+<center>
+<div class="element-animation"> 
+<img src="dhftgfhjy.png" style="width: 70%; height: 40%;margin-top: 65px;">
+
+</div></center>
+
+
+
+
+<center>
+<div class="element-animation"> 
+<img src="tgfnjygfjythj.png" style="width: 90%; height: 40%;margin-top: 20px;">
+
+</div></center>
+
+
+
+
+
+<center>
+<div class="element-animation"> 
+<img src="tyjytjkyuk.png" style="width: 70%; height: 40%;margin-top: 65px;">
+
+</div></center>
+
+
+<center>
+<div class="element-animation"> 
+<img src="ehgrtht
+.png" style="width: 70%; height: 40%;margin-top: 65px;">
+
+</div></center>
+
+
+
+
+
+
+<div class="element-animation"> 
+<center>
+<div style="margin-top: 20px;">
+<a href="https://2gis.kz/kyzylorda/geo/70000001063499433
+"><img src="hthf.png" style="width: 35px; height: 35px; border-radius: 20%;"></a>
+</div>
+</center>
+</div>
+
+
+
+<iframe id="map_121379413" style="margin-top:30px;" frameborder="0" width="100%"  sandbox="allow-modals allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation"></iframe><script type="text/javascript">(function(e,t){var r=document.getElementById(e);r.contentWindow.document.open(),r.contentWindow.document.write(atob(t)),r.contentWindow.document.close()})("map_121379413", "PGJvZHk+PHN0eWxlPgogICAgICAgIGh0bWwsIGJvZHkgewogICAgICAgICAgICBtYXJnaW46IDA7CiAgICAgICAgICAgIHBhZGRpbmc6IDA7CiAgICAgICAgfQogICAgICAgIGh0bWwsIGJvZHksICNtYXAgewogICAgICAgICAgICB3aWR0aDogMTAwJTsKICAgICAgICAgICAgaGVpZ2h0OiAxMDAlOwogICAgICAgIH0KICAgICAgICAuYnVsbGV0LW1hcmtlciB7CiAgICAgICAgICAgIHdpZHRoOiAyMHB4OwogICAgICAgICAgICBoZWlnaHQ6IDIwcHg7CiAgICAgICAgICAgIGJveC1zaXppbmc6IGJvcmRlci1ib3g7CiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6ICNmZmY7CiAgICAgICAgICAgIGJveC1zaGFkb3c6IDAgMXB4IDNweCAwIHJnYmEoMCwgMCwgMCwgMC4yKTsKICAgICAgICAgICAgYm9yZGVyOiA0cHggc29saWQgIzAyODFmMjsKICAgICAgICAgICAgYm9yZGVyLXJhZGl1czogNTAlOwogICAgICAgIH0KICAgICAgICAucGVybWFuZW50LXRvb2x0aXAgewogICAgICAgICAgICBiYWNrZ3JvdW5kOiBub25lOwogICAgICAgICAgICBib3gtc2hhZG93OiBub25lOwogICAgICAgICAgICBib3JkZXI6IG5vbmU7CiAgICAgICAgICAgIHBhZGRpbmc6IDZweCAxMnB4OwogICAgICAgICAgICBjb2xvcjogIzI2MjYyNjsKICAgICAgICB9CiAgICAgICAgLnBlcm1hbmVudC10b29sdGlwOmJlZm9yZSB7CiAgICAgICAgICAgIGRpc3BsYXk6IG5vbmU7CiAgICAgICAgfQogICAgICAgIC5kZy1wb3B1cF9oaWRkZW5fdHJ1ZSB7CiAgICAgICAgICAgIGRpc3BsYXk6IGJsb2NrOwogICAgICAgIH0KICAgICAgICAubGVhZmxldC1jb250YWluZXIgLmxlYWZsZXQtcG9wdXAgLmxlYWZsZXQtcG9wdXAtY2xvc2UtYnV0dG9uIHsKICAgICAgICAgICAgdG9wOiAwOwogICAgICAgICAgICByaWdodDogMDsKICAgICAgICAgICAgd2lkdGg6IDIwcHg7CiAgICAgICAgICAgIGhlaWdodDogMjBweDsKICAgICAgICAgICAgZm9udC1zaXplOiAyMHB4OwogICAgICAgICAgICBsaW5lLWhlaWdodDogMTsKICAgICAgICB9CiAgICA8L3N0eWxlPjxkaXYgaWQ9Im1hcCI+PC9kaXY+PHNjcmlwdCB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiIHNyYz0iaHR0cHM6Ly9tYXBzLmFwaS4yZ2lzLnJ1LzIuMC9sb2FkZXIuanM/cGtnPWZ1bGwmYW1wO3NraW49bGlnaHQiPjwvc2NyaXB0PjxzY3JpcHQ+KGZ1bmN0aW9uKGUpe3ZhciB0PUpTT04ucGFyc2UoZSkscj10Lm9yZGVyZWRHZW9tZXRyaWVzLG49dC5tYXBQb3NpdGlvbixhPXQuaXNXaGVlbFpvb21FbmFibGVkO2Z1bmN0aW9uIG8oZSl7cmV0dXJuIGRlY29kZVVSSUNvbXBvbmVudChhdG9iKGUpLnNwbGl0KCIiKS5tYXAoZnVuY3Rpb24oZSl7cmV0dXJuIiUiKygiMDAiK2UuY2hhckNvZGVBdCgwKS50b1N0cmluZygxNikpLnNsaWNlKC0yKX0pLmpvaW4oIiIpKX1ERy50aGVuKGZ1bmN0aW9uKCl7dmFyIGU9REcubWFwKCJtYXAiLHtjZW50ZXI6W24ubGF0LG4ubG9uXSx6b29tOm4uem9vbSxzY3JvbGxXaGVlbFpvb206YSx6b29tQ29udHJvbDohYX0pO0RHLmdlb0pTT04ocix7c3R5bGU6ZnVuY3Rpb24oZSl7dmFyIHQscixuLGEsbztyZXR1cm57ZmlsbENvbG9yOm51bGw9PT0odD1lKXx8dm9pZCAwPT09dD92b2lkIDA6dC5wcm9wZXJ0aWVzLmZpbGxDb2xvcixmaWxsT3BhY2l0eTpudWxsPT09KHI9ZSl8fHZvaWQgMD09PXI/dm9pZCAwOnIucHJvcGVydGllcy5maWxsT3BhY2l0eSxjb2xvcjpudWxsPT09KG49ZSl8fHZvaWQgMD09PW4/dm9pZCAwOm4ucHJvcGVydGllcy5zdHJva2VDb2xvcix3ZWlnaHQ6bnVsbD09PShhPWUpfHx2b2lkIDA9PT1hP3ZvaWQgMDphLnByb3BlcnRpZXMuc3Ryb2tlV2lkdGgsb3BhY2l0eTpudWxsPT09KG89ZSl8fHZvaWQgMD09PW8/dm9pZCAwOm8ucHJvcGVydGllcy5zdHJva2VPcGFjaXR5fX0scG9pbnRUb0xheWVyOmZ1bmN0aW9uKGUsdCl7cmV0dXJuInJhZGl1cyJpbiBlLnByb3BlcnRpZXM/REcuY2lyY2xlKHQsZS5wcm9wZXJ0aWVzLnJhZGl1cyk6REcubWFya2VyKHQse2ljb246ZnVuY3Rpb24oZSl7cmV0dXJuIERHLmRpdkljb24oe2h0bWw6IjxkaXYgY2xhc3M9J2J1bGxldC1tYXJrZXInIHN0eWxlPSdib3JkZXItY29sb3I6ICIrZSsiOyc+PC9kaXY+IixjbGFzc05hbWU6Im92ZXJyaWRlLWRlZmF1bHQiLGljb25TaXplOlsyMCwyMF0saWNvbkFuY2hvcjpbMTAsMTBdfSl9KGUucHJvcGVydGllcy5jb2xvcil9KX0sb25FYWNoRmVhdHVyZTpmdW5jdGlvbihlLHQpe2UucHJvcGVydGllcy5kZXNjcmlwdGlvbiYmdC5iaW5kUG9wdXAobyhlLnByb3BlcnRpZXMuZGVzY3JpcHRpb24pLHtjbG9zZUJ1dHRvbjohMCxjbG9zZU9uRXNjYXBlS2V5OiEwfSksZS5wcm9wZXJ0aWVzLnRpdGxlJiZ0LmJpbmRUb29sdGlwKG8oZS5wcm9wZXJ0aWVzLnRpdGxlKSx7cGVybWFuZW50OiEwLG9wYWNpdHk6MSxjbGFzc05hbWU6InBlcm1hbmVudC10b29sdGlwIn0pfX0pLmFkZFRvKGUpfSl9KSgneyJvcmRlcmVkR2VvbWV0cmllcyI6W3sidHlwZSI6IkZlYXR1cmUiLCJwcm9wZXJ0aWVzIjp7ImNvbG9yIjoiIzAyODFmMiIsInRpdGxlIjoiIiwiZGVzY3JpcHRpb24iOiIiLCJ6SW5kZXgiOjEwMDAwMDAwMDB9LCJnZW9tZXRyeSI6eyJ0eXBlIjoiUG9pbnQiLCJjb29yZGluYXRlcyI6WzY1LjU1Mjg1Miw0NC44MDQ1MDNdfSwiaWQiOjEyMTd9XSwibWFwUG9zaXRpb24iOnsibGF0Ijo0NC44MDQ0NjMxNzMzMjYyMSwibG9uIjo2NS41NTI4MDg1NDk3MjIyNCwiem9vbSI6MTh9LCJpc1doZWVsWm9vbUVuYWJsZWQiOnRydWV9Jyk8L3NjcmlwdD48c2NyaXB0IGFzeW5jPSIiIHR5cGU9InRleHQvamF2YXNjcmlwdCIgc3JjPSJodHRwczovL3d3dy5nb29nbGV0YWdtYW5hZ2VyLmNvbS9ndGFnL2pzP2lkPVVBLTE1ODg2NjE2OC0xIj48L3NjcmlwdD48c2NyaXB0IHR5cGU9InRleHQvamF2YXNjcmlwdCI+KGZ1bmN0aW9uKGUpe2Z1bmN0aW9uIHQoKXtkYXRhTGF5ZXIucHVzaChhcmd1bWVudHMpfXdpbmRvdy5kYXRhTGF5ZXI9d2luZG93LmRhdGFMYXllcnx8W10sdCgianMiLG5ldyBEYXRlKSx0KCJjb25maWciLGUpLHdpbmRvdy5ndGFnPXR9KSgnVUEtMTU4ODY2MTY4LTEnKTwvc2NyaXB0PjwvYm9keT4=")</script>
+
+
+
+
+
+<center>
+<div class="element-animation"> 
+<img src="tgjnyhkjuk.png" style="width: 70%;margin-top: 50px;">
+
+</div></center>
+
+
+
+ 
+
+<center>
+<div class="element-animation"> 
+<img src="fgnjghjnmuhkj.png" style="width: 85%;margin-top: 80px;">
+
+</div></center>
+
+
+
+
+
+
+
+
+
+
+
+
+<center>
+
+<img src="ukmjuki.png" style="width: 60%; margin-top: 130px;">
+
+</center>
+
+
+<center>
+  <div class="hgh">
+<div class="timer">
+  <div class="timer__items">
+    <div class="timer__item timer__days">00</div>
+    <div class="timer__item timer__hours">00</div>
+    <div class="timer__item timer__minutes">00</div>
+    <div class="timer__item timer__seconds">00</div>
+  </div>
+</div></div>
+</center>
+
+
+
+
+
+<center style="margin-top: 80px;margin-bottom: 50px;">
+<form class="transparent"method="post" id="form">
+<div class="form-inner">
+<h3>Тойға келесізбе?</h3>
+
+<input type="text" name="name" placeholder="Ия/жоқ"   minlength="2" maxlength="20" />
+    <textarea
+          name="message"
+          maxlength="100"
+          id="message"
+          cols="30"
+          rows="4"
+          placeholder="Есіміңізді жазыңыз"
+         
+        ></textarea>
+<input class="btb" type="submit" value="Жіберу" style="color:white;">
+</div>
+</form></center>
+
+
+  <script>
+
+
+     const URL_APP =     "https://script.google.com/macros/s/AKfycbxGDKhfyDP876d3K51lcZqIedMM1EmE2Og-gOVKlWGdDHyrhKj5AUIyINmVpks5TMFavw/exec";
+
+      
+      const form = document.querySelector("#form");
+
+  
+      form.action = URL_APP;
+
+    
+      function isFilled(details) {
+        const { name } = details;
+        if (!name) return false;
+       
+        return true;
+      }
+
+      form.addEventListener("submit", async (ev) => {
+       
+        ev.preventDefault();
+
+        const name = document.querySelector("[name=name]");
+      
+        const message = document.querySelector("[name=message]");
+      
+        let details = {
+          name: name.value.trim(),
+      
+          message: message.value.trim(),
+      
+        };
+
+        if (!isFilled(details)) return;
+
+      
+        let formBody = [];
+        for (let property in details) {
+       
+          let encodedKey = encodeURIComponent(property);
+          let encodedValue = encodeURIComponent(details[property]);
+          formBody.push(encodedKey + "=" + encodedValue);
+        }
+     
+        formBody = formBody.join("&");
+
+   
+        const result = await fetch(URL_APP, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+          },
+          cors: "no-cors",
+          body: formBody,
+        })
+          .then((res) => res.json())
+          .catch((err) => alert("Ошибка!"))
+     
+          
+         if( result.type === 'success' ) {
+            name.value = '';
+            message.value = '';
+           alert('Жауабыңызға рахмет!')
+         }
+         if( result.type === 'error' ) {            
+           alert(`Ошибка( ${result.errors}`)
+         }
+
+
+      });
+
+</script>
+
+
+
+
+
+  <script>
+      var slideIndex = 0;
+      showSlides();
+      
+      function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none"; 
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1} 
+        slides[slideIndex-1].style.display = "block"; 
+        setTimeout(showSlides, 2000); // Change image every 2 seconds
+      
+      }
+    </script>
+
+
+<script>
+    function onEntry(entry) { 
+      entry.forEach(change => { 
+        if (change.isIntersecting) { 
+         change.target.classList.add('element-show'); 
+         
+        } 
+      }); 
+    } 
+        let options = { 
+      threshold: [0.5] }; 
+    let observer = new IntersectionObserver(onEntry, options); 
+    let elements = document.querySelectorAll('.element-animation'); 
+     
+    for (let elm of elements) { 
+      observer.observe(elm); 
+    }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https: //fonts.googleapis.com/css2?family= Piazzolla :wght@100 & display=swap" rel="stylesheet">
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
